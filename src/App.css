@@ -1,0 +1,100 @@
+
+
+.firstDiv {
+  background-color: lightblue; 
+  background-position: 100% 100%; 
+  margin: 0em; 
+  padding: 0em; 
+  height: 100vh;
+}
+.firstDivMain {
+  background-color: lightblue; 
+  background-position: 100% 100%; 
+  margin: 0em;
+  padding: 0em; 
+  height: 100vh;
+}
+.secondDiv{
+  background-image: url(eth-diamond-black-gray.png); 
+  height: 100vh;   
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  background-size: 100% 100%;
+}
+.secondDivMain{
+  background-image: url(eth-diamond-black-gray.png); 
+  height: 100vh;   
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  background-size: 100% 100%;
+}
+
+.seventhDiv{
+  width: 22rem; 
+  height: 28rem; 
+ 
+  border-width: thin medium thick 10px;
+}
+.seventhDivMain{
+  width: 22rem; 
+  height: 5rem; 
+  border-width: thin medium thick 10px;
+}
+
+.stake-stake-btn{
+  background-color: lightgrey; 
+  width: 21%; 
+  color: black;
+  
+}
+.stake-withdraw-btn{
+  background-color: white; 
+  width: 21%; 
+  color: black;
+} 
+
+.withdraw-withdraw-btn{
+  background-color: lightgray; 
+  width: 50%; 
+  color: black;
+}
+
+.withdraw-stake-btn {
+  background-color: white; 
+  width: 50%; 
+  color: black;
+}
+
+.stakenow-btn{
+  width: 100%; 
+  background-color: lightgrey;
+}
+.cardbody{
+  margin-left: 30.1em;
+  margin-top: 3.5em;
+}
+
+.cardbodyMain{
+  margin-left: 36.5em;
+  margin-top: 5em;
+  height: 5em;
+}
+
+.form-body{
+  margin-top: 2em;
+}
+
+.ctrl-switch{
+  width: 30%;
+  height: 1cm;
+
+  
+}
+
+.move-card-right{
+  margin-left: 2em;
+}
+
+form-prop{
+  margin-top: 6em;
+}
