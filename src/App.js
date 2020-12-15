@@ -79,7 +79,8 @@ class App extends Component {
       let RewardTokenBalance = await rewardtoken.methods.balanceOf(this.state.account).call()
       console.log(RewardTokenBalance)
 
-      this.setState({ RewardTokenBalance: RewardTokenBalance.toString() })
+      this.setState({ RewardTokenBalance: RewardTokenBalance.toString() 
+      })
 
     } else {
       window.alert(' REWARD TOKEN not on this blockchain network')
@@ -175,16 +176,16 @@ render() {
         <main role='main' className='col-lg-12 d-flex ml-auto mr-auto' style={{ maxWidth: '600px' }}></main>
         <a
           className="App-link"
-          href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
         </a>
 
-        {content}
+
 
 
       </header>
+      {content}
     </div>
   );
 
