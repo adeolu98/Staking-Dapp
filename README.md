@@ -1,3 +1,12 @@
+you can migrate all contracts to the blockchain using truffle. take note to remove 5_initial_migration.js, the migration file for the staking contract from the migrations folder first. migrate all other contracts, then supply all constructor arguments needed to deploy the staking contract code after. they are all token addresses so use 'truffle networks' to get that. Also move the new updated deployed contract json files from build folder to the src folder. after that 'npm start' the react app
+
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
