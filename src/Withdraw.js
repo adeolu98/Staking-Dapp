@@ -24,31 +24,34 @@ class Withdraw extends Component {
                                 <div class="seventhDiv card border border-dark rounded-lg shadow-lg p-3 mb-5 bg-white rounded">
 
                                     <div class="card-body">
-                                    <h6> <p>       You have {window.web3.utils.fromWei(this.props.LPTokenBalance, 'Ether')} STK tokens staked</p></h6>
-                                        <form onSubmit = {(event) => {
+                                        <h6> <p>       You have {window.web3.utils.fromWei(this.props.LPTokenBalance, 'Ether')} STK tokens staked</p></h6>
+                                        <form onSubmit={(event) => {
                                             event.preventDefault()
                                             let AmountToBeWithdrawn
                                             AmountToBeWithdrawn = window.web3.utils.toWei(this.state.withdrawAmount, 'Ether')
                                             this.props.Withdraw(AmountToBeWithdrawn)
 
-                                            this.props.StakingContract.events.allEvents()
-                                            .on('data', (event) => {
-                                             window.location.reload()
-                                            })
-                                            .on('error', console.error);
-                                        
-                                        }} min = '0' >
+                                            if (this.props.stakingcontractdata === true) {
+                                                this.props.StakingContract.events.allEvents()
+                                                    .on('data', (event) => {
+                                                        window.location.reload()
+                                                    })
+                                                    .on('error', console.error);
+                                            }
+                                            else { }
+
+                                        }} min='0' >
                                             <div class="form-group form-body">
                                                 <label for="exampleInputEmail1">STAKE Token</label>
                                                 <span class='float-right text-muted'>
                                                     You have {window.web3.utils.fromWei(this.props.LPTokenBalance, 'Ether')}  LP Tokens
                                                 </span>
-                                                <input type="number" min = '0' class="form-control" aria-describedby="emailHelp" onChange={(event) => {
+                                                <input type="number" min='0' class="form-control" aria-describedby="emailHelp" onChange={(event) => {
                                                     const LPTokenAmount = this.input.value.toString()
                                                     this.setState({ withdrawAmount: LPTokenAmount })
                                                 }}
                                                     ref={(input) => { this.input = input }}
-                                                    placeholder= '0' />
+                                                    placeholder='0' />
                                                 <small id="emailHelp" class="form-text text-muted">
                                                     You want to withdraw {this.state.withdrawAmount} STAKE Tokens.
                                                 </small>
@@ -64,7 +67,7 @@ class Withdraw extends Component {
                                                 }}
                                                     ref={(input) => { this.input2 = input }}
                                                     placeholder={this.state.withdrawAmount.toString()} disabled />
-                                                <small id="ethToPay"> You will get { this.state.withdrawAmount/100} more Reward Tokens and { this.state.withdrawAmount} STAKE token when you withdraw. </small>
+                                                <small id="ethToPay"> You will get {this.state.withdrawAmount / 100} more Reward Tokens and {this.state.withdrawAmount} STAKE token when you withdraw. </small>
                                             </div>
                                             <div class="d-flex justify-content-center">
                                                 <button type="submit" class=" stakenow-btn btn-lg " >WITHDRAW</button>

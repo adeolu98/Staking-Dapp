@@ -31,11 +31,14 @@ class Stake extends Component {
                       AmountStaked = window.web3.utils.toWei(this.state.stakeAmount, 'Ether')
                       this.props.stake(AmountStaked)
 
-                      this.props.StakingContract.events.allEvents()
-                        .on('data', (event) => {
-                         window.location.reload()
-                        })
-                        .on('error', console.error);
+                      if (this.props.stakingcontractdata === true) {
+                        this.props.StakingContract.events.allEvents()
+                          .on('data', (event) => {
+                            window.location.reload()
+                          })
+                          .on('error', console.error);
+                      }
+                      else { }
                     }}>
                       <div class="form-group form-body" style={{ marginTop: 0 }}>
                         <label for="exampleInputNumber"> STAKE Token </label>

@@ -18,7 +18,7 @@ class Navbar extends Component {
         <ul className='nav-bar-nav px-3'>
           <li className='nav-item text-nowrap d-none d-sm-none d-sm-block'>
             <small className= 'text-secondary'>
-              <small id ="account"> {this.props.account} </small>
+              <small id ="account" style = {{color: "white"}}> {this.props.account} </small>
             </small>
             
             { this.props.account

@@ -2,12 +2,8 @@ import './App.css';
 import Stake from './Stake.js';
 import Withdraw from './Withdraw.js'
 import React, { Component } from 'react';
-import Web3 from 'web3';
-import stakingContract from './stakingContract.json';
-import Navbar from './Navbar.js';
-import StakeToken from './StakeToken.json';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "./App.js";
+
 
 
 class Main extends Component {
@@ -32,6 +28,7 @@ class Main extends Component {
                 staking={this.props.staking}
                 LPTokenBalance = {this.props.LPTokenBalance}
                 StakingContract =  {this.props.StakingContract}
+                stakingcontractdata = {this.props.stakingcontractdata}
             />
         } else {
             content = <Withdraw
@@ -42,6 +39,7 @@ class Main extends Component {
                 RewardTokenBalance = {this.props.RewardTokenBalance}
                 LPTokenBalance = {this.props.LPTokenBalance}
                 StakingContract =  {this.props.StakingContract}
+                stakingcontractdata = {this.props.stakingcontractdata}
                 
             />
         }
@@ -60,7 +58,6 @@ class Main extends Component {
                     <div className='cardbody'>
 
                         <button class=" stake-stake-btn btn-lg" onClick={(event) => { this.setState({ staking: 'true', StakeBgColor: 'lightgrey', WithdrawBgColor: 'white' }) }} style={{ backgroundColor: this.state.StakeBgColor }} >
-
                             <h6> STAKE </h6>
                         </button>
                         <button type="submit" class=" stake-withdraw-btn btn-lg" onClick={(event) => { this.setState({ staking: 'false', StakeBgColor: 'white', WithdrawBgColor: 'lightgrey' }) }} style={{ backgroundColor: this.state.WithdrawBgColor }}>

@@ -264,7 +264,7 @@ contract LPToken is MintableToken{
     
     uint public constant decimals = 18;
     
-    uint public totalSupply = 100* 10**18;
+    uint public totalSupply = 100000000000000000000000000* 10**18;
     
     constructor() {
         balances[msg.sender] = totalSupply;

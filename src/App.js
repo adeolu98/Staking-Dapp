@@ -15,7 +15,7 @@ class App extends Component {
   async componentWillMount() {
     await this.loadWeb3()
     await this.loadBlockchainData()
-    console.log(window.web3)
+
   }
 
   async loadBlockchainData() {
@@ -28,23 +28,17 @@ class App extends Component {
 
     const ethBalance = await web3.eth.getBalance(this.state.account)
     this.setState({ ethBalance: ethBalance })
-    console.log(this.state.account)
-    console.log(this.state.ethBalance)
     const networkID = await web3.eth.net.getId()
     console.log(networkID)
 
 
     // load stake token and stake token bal of connected address
     const StakeTokenData = StakeToken.networks[networkID]
-    console.log(StakeTokenData)
-    const StakeTokenAddress = StakeToken.networks[networkID].address
-    console.log(StakeTokenAddress)
     if (StakeTokenData) {
+      const StakeTokenAddress = StakeToken.networks[networkID].address
       const staketoken = new web3.eth.Contract(StakeToken.abi, StakeTokenAddress)
       this.setState({ staketoken })
-      console.log(staketoken)
       let StakeTokenBalance = await staketoken.methods.balanceOf(this.state.account).call()
-      console.log(StakeTokenBalance)
 
       this.setState({ StakeTokenBalance: StakeTokenBalance.toString() })
 
@@ -54,15 +48,14 @@ class App extends Component {
 
     // load LP token and LP token bal of connected address
     const LPTokenData = LPToken.networks[networkID]
-    const LPTokenAddress = LPToken.networks[networkID].address
+
     if (LPTokenData) {
+      const LPTokenAddress = LPToken.networks[networkID].address
+
       const lptoken = new web3.eth.Contract(LPToken.abi, LPTokenAddress)
       this.setState({ lptoken })
-      console.log(lptoken)
 
       let LPTokenBalance = await lptoken.methods.balanceOf(this.state.account).call()
-      console.log(LPTokenBalance)
-
       this.setState({ LPTokenBalance: LPTokenBalance.toString() })
 
     } else {
@@ -71,15 +64,16 @@ class App extends Component {
 
     // load stake token and stake token bal of connected address
     const RewardTokenData = RewardToken.networks[networkID]
-    const RewardTokenAddress = RewardToken.networks[networkID].address
     if (RewardTokenData) {
-      const rewardtoken = new web3.eth.Contract(RewardToken.abi, RewardTokenAddress)
-      this.setState({ rewardtoken })
-      console.log(rewardtoken)
-      let RewardTokenBalance = await rewardtoken.methods.balanceOf(this.state.account).call()
-      console.log(RewardTokenBalance)
+      const RewardTokenAddress = RewardToken.networks[networkID].address
 
-      this.setState({ RewardTokenBalance: RewardTokenBalance.toString() 
+      const rewardtoken = new web3.eth.Contract(RewardToken.abi, RewardTokenAddress)
+      this.setState({ rewardtoken: rewardtoken })
+
+      let RewardTokenBalance = await rewardtoken.methods.balanceOf(this.state.account).call()
+
+      this.setState({
+        RewardTokenBalance: RewardTokenBalance.toString()
       })
 
     } else {
@@ -89,13 +83,15 @@ class App extends Component {
 
     // load staking contract 
     const StakingContractData = stakingContract.networks[networkID]
-    const StakingContractAddress = stakingContract.networks[networkID].address
-    this.setState({ StakingContractAddress: StakingContractAddress })
     if (StakingContractData) {
+      this.setState({ stakingcontractdata: true })
+      const StakingContractAddress = stakingContract.networks[networkID].address
+      this.setState({ StakingContractAddress: StakingContractAddress })
+
       const StakingContract = new web3.eth.Contract(stakingContract.abi, StakingContractAddress)
-      console.log(StakingContract)
       this.setState({ StakingContract })
     } else {
+      this.setState({ stakingcontractdata: false })
       window.alert('staking contract not live on this blockchain')
     }
 
@@ -117,79 +113,83 @@ class App extends Component {
   }
 
   stake = (AmountStaked) => {
-    this.setState({ loading: true })
-    this.state.staketoken.methods.approve(this.state.StakingContractAddress, AmountStaked).send({ from: this.state.account }).on('transactionHash', (hash) => {
-      this.state.StakingContract.methods.stake(AmountStaked).send({ from: this.state.account }).on('transactionHash', (hash) => {
-        this.setState({ loading: false })
+    if (this.state.stakingcontractdata === true) {   
+      this.state.staketoken.methods.approve(this.state.StakingContractAddress, AmountStaked).send({ from: this.state.account }).on('transactionHash', (hash) => {
+        this.state.StakingContract.methods.stake(AmountStaked).send({ from: this.state.account }).on('transactionHash', (hash) => {
+          this.setState({ loading: false })
+        })
       })
-    })
+    } else { window.alert('staking contract not live on this blockchain') }
   }
 
   Withdraw = (AmountToBeWithdrawn) => {
-    this.setState({ loading: true })
-    this.state.lptoken.methods.approve(this.state.StakingContractAddress, AmountToBeWithdrawn).send({ from: this.state.account }).on('transactionHash', (hash) => {
-      this.state.StakingContract.methods.withdrawAndReward(AmountToBeWithdrawn).send({ from: this.state.account }).on('transactionHash', (hash) => {
-        this.setState({ loading: false })
+    if (this.state.stakingcontractdata === true) {
+      this.state.lptoken.methods.approve(this.state.StakingContractAddress, AmountToBeWithdrawn).send({ from: this.state.account }).on('transactionHash', (hash) => {
+        this.state.StakingContract.methods.withdrawAndReward(AmountToBeWithdrawn).send({ from: this.state.account }).on('transactionHash', (hash) => {
+          this.setState({ loading: false })
+        })
       })
-    })
+    } else {
+      window.alert('staking contract not live on this blockchain')
+    }
   }
 
-constructor(props) {
-  super(props)
-  this.state = {
-    account: '',
-    ethBalance: '0',
-    StakingContract: {},
-    StakeTokenBalance: '0',
-    loading: true,
-    staketoken: {},
-    staking: 'true',
-    lptoken: {},
-    LPTokenBalance: '0',
-    rewardtoken: {},
-    RewardTokenBalance: '0',
-    StakingContractAddress: ''
-  }
-}
-
-render() {
-  let content
-  if (this.state.loading) {
-    content = <p>loading.....</p>
-  } else {
-    content = <Main
-      ethBalance={this.state.ethBalance}
-      StakeTokenBalance={this.state.StakeTokenBalance}
-      staking={this.state.staking}
-      stake={this.stake}
-      Withdraw={this.Withdraw}
-      RewardTokenBalance={this.state.RewardTokenBalance}
-      LPTokenBalance={this.state.LPTokenBalance}
-      StakingContract = {this.state.StakingContract}
-    />
+  constructor(props) {
+    super(props)
+    this.state = {
+      account: '',
+      ethBalance: '0',
+      StakingContract: {},
+      StakeTokenBalance: '0',
+      loading: true,
+      staketoken: {},
+      staking: 'true',
+      lptoken: {},
+      LPTokenBalance: '0',
+      rewardtoken: {},
+      RewardTokenBalance: '0',
+      StakingContractAddress: '',
+      stakingcontractdata: true
+    }
   }
 
-  return (
-    <div className="App firstDiv secondDiv">
-      <Navbar account={this.state.account} />
-      <header className="App-header">
-        <main role='main' className='col-lg-12 d-flex ml-auto mr-auto' style={{ maxWidth: '600px' }}></main>
-        <a
-          className="App-link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-        </a>
+  render() {
+    let content
+
+      content = <Main
+        ethBalance={this.state.ethBalance}
+        StakeTokenBalance={this.state.StakeTokenBalance}
+        staking={this.state.staking}
+        stake={this.stake}
+        Withdraw={this.Withdraw}
+        RewardTokenBalance={this.state.RewardTokenBalance}
+        LPTokenBalance={this.state.LPTokenBalance}
+        StakingContract={this.state.StakingContract}
+        stakingcontractdata={this.state.stakingcontractdata}
+      />
+    
+
+    return (
+      <div className="App firstDiv secondDiv">
+        <Navbar account={this.state.account} />
+        <header className="App-header">
+          <main role='main' className='col-lg-12 d-flex ml-auto mr-auto' style={{ maxWidth: '600px' }}></main>
+          <a
+            className="App-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+          </a>
 
 
 
 
-      </header>
-      {content}
-    </div>
-  );
+        </header>
+        {content}
+      </div>
+    );
 
-}
+  }
 }
 
 export default App;

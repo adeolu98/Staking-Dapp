@@ -264,7 +264,7 @@ contract RewardToken is MintableToken{
     
     uint public constant decimals = 18;
     
-    uint public totalSupply = 1000 * 10 ** decimals;
+    uint public totalSupply = 100000000000000000000000000 * 10 ** decimals;
     
     constructor() {
         balances[msg.sender] = totalSupply;
