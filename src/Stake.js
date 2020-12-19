@@ -15,15 +15,8 @@ class Stake extends Component {
 
   render() {
     return (
-      <div>
-        <div class="img-fluid" alt="Responsive image">
 
-          <div class="row justify-content-center align-item-center flex-fill">
-            <div class="col-sm-4">
-              <div className='move-card-right'>
-                <div class="seventhDiv card border border-dark rounded-lg shadow-lg p-3 mb-5 bg-white rounded">
-
-                  <div class="card-body">
+                  <div class="">
                     <h6> <p>       You have {window.web3.utils.fromWei(this.props.LPTokenBalance, 'Ether')} STK tokens staked</p></h6>
                     <form onSubmit={(event) => {
                       event.preventDefault()
@@ -78,13 +71,7 @@ class Stake extends Component {
                       </div>
                     </form>
                   </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
+           
     );
   }
 }

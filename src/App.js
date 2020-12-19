@@ -170,7 +170,7 @@ class App extends Component {
     
 
     return (
-      <div className="App firstDiv secondDiv">
+      <div className="App ">
         <Navbar account={this.state.account} />
         <header className="App-header">
           <main role='main' className='col-lg-12 d-flex ml-auto mr-auto' style={{ maxWidth: '600px' }}></main>
