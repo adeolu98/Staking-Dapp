@@ -1,4 +1,4 @@
-var HDWalletProvider = require("@truffle/hdwallet-provider");
+var HDWalletProvider = require("@truffle/hdwallet-provider") ;
 const mnemonic = '6b5858d304182193ee936a063722a98ebd927528776720f9f8de1d30ad02c2e4';
 
 
