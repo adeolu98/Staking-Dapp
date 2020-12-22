@@ -7,13 +7,13 @@
   padding: 0em; 
   height: 100vh;
 }
+
 .secondDiv{
   background-image: url(eth-diamond-black-gray.png); 
-  height: 80%;   
   background-repeat: no-repeat; 
   background-attachment: fixed; 
   background-size: 100% 100%;
-  margin-top: 5%;
+  height: 100vh;
 }
 
 
@@ -38,18 +38,9 @@
 .withdrawnow-btn{
   width: 100%;
   background-color: lightgrey;
-  margin-top: 1.6em;
+
 }
 
-
-
-.form-body{
-  margin-top: 2em;
-}
-
-.form-prop{
-  margin-top: 6em;
-}
 
 .card-props{
   width: 65%;
@@ -60,3 +51,6 @@
   margin-top: 7%;
 }
 
+.token-declaration-text{
+  margin-top: 1%;
+}

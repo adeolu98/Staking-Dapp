@@ -1,3 +1,7 @@
+var HDWalletProvider = require("@truffle/hdwallet-provider");
+const mnemonic = '6b5858d304182193ee936a063722a98ebd927528776720f9f8de1d30ad02c2e4';
+
+
 /**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
@@ -42,10 +46,10 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
-     development: {
+    development: {
       host: "127.0.0.1",     // Localhost (default: none)
       port: 8545,            // Standard Ethereum port (default: none)
-      network_id: "*",       // Any network (default: none)
+     network_id: "*",       // Any network (default: none)
      },
     // Another network with more advanced options...
     // advanced: {
@@ -58,14 +62,14 @@ module.exports = {
     // },
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
-    // ropsten: {
-    // provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/YOUR-PROJECT-ID`),
-    // network_id: 3,       // Ropsten's id
-    // gas: 5500000,        // Ropsten has a lower block limit than mainnet
-    // confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+     ropsten: {
+     provider: () => new HDWalletProvider(mnemonic, `wss://ropsten.infura.io/ws/v3/a83882b86e4c4c97b62714d393a1e8dd`),
+     network_id: 3,       // Ropsten's id
+     gas: 5500000,        // Ropsten has a lower block limit than mainnet
+     //confirmations: 2,    // # of confs to wait between deployments. (default: 0)
     // timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
-    // skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
-    // },
+     //skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+     },
     // Useful for private networks
     // private: {
     // provider: () => new HDWalletProvider(mnemonic, `https://network.io`),
@@ -93,4 +97,4 @@ module.exports = {
       // }
     },
   },
-};
+}; 

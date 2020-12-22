@@ -18,7 +18,7 @@ class Withdraw extends Component {
 
 
             <div class="">
-                <h6> <p>       You have {window.web3.utils.fromWei(this.props.LPTokenBalance, 'Ether')} STK tokens staked</p></h6>
+                <h6> <p className = 'token-declaration-text'>       You have {window.web3.utils.fromWei(this.props.LPTokenBalance, 'Ether')} STK tokens staked</p></h6>
                 <form onSubmit={(event) => {
                     event.preventDefault()
                     let AmountToBeWithdrawn
@@ -35,7 +35,7 @@ class Withdraw extends Component {
                     else { }
 
                 }} min='0' >
-                    <div class="form-group form-body">
+                    <div class="form-group">
                         <label for="exampleInputEmail1">STAKE Token</label>
                         <span class='float-right text-muted'>
                             You have {window.web3.utils.fromWei(this.props.LPTokenBalance, 'Ether')}  LP Tokens

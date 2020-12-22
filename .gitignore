@@ -10,6 +10,7 @@
 
 # production
 /build
+.truffle-config.js
 
 # misc
 .DS_Store

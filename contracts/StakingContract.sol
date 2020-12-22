@@ -51,15 +51,6 @@ contract stakingContract {
         return amountStaked;
     }
     
-    // set the time staking starts
-    function TimeStakingOnContractStarts( uint _StakingStarts) public{
-        StakingStarts = _StakingStarts;
-    }
-    
-    // call function to get the set time staking started
-    function getTimeStakingOnContractStarts() public view returns(uint){
-        return StakingStarts;
-    }
     
     
     function timeOfstaking() public view returns (uint timeOfStaking) {
@@ -94,7 +85,7 @@ contract stakingContract {
         withdrawalAmount = _withdrawalAmount;
         
         
-         //make sure lptokenBalOfSender is greater or le ss than the withdrawalAmount
+         //make sure lptokenBalOfSender is greater or less than the withdrawalAmount
         require(withdrawalAmount <= lptokenAdd.balanceOf(msg.sender), 'withdrawal amount too large, larger than your staked tokens');
         
         

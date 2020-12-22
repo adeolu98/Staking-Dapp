@@ -1,8 +1,8 @@
   
 var StakingContract = artifacts.require("StakingContract");
-const  LPToken = '0xDF17E2a61464F9571AB9082810821E412810bd0D'
-const  RewardToken = '0x925213DCce96451Cb6ef329EF6175f2cB341CE65'
-const  StakeToken =  '0x4e9327cA9b05656cfA9A4F86F08644eE0E90E314'
+const  LPToken = '0xb89571643D92ec85DCB20b397DD28E1166107c42'
+const  RewardToken = '0xCf825f35c4eDB34089cEaeFAddcE5aAB02ec7c94'
+const  StakeToken =  '0x90c7Aa3D4D8fE3e4C869E55F7011C579f00e3b0e'
 
 
 module.exports = function(deployer) {

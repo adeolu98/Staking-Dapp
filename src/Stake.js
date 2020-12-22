@@ -17,7 +17,7 @@ class Stake extends Component {
     return (
 
                   <div class="">
-                    <h6> <p>       You have {window.web3.utils.fromWei(this.props.LPTokenBalance, 'Ether')} STK tokens staked</p></h6>
+                    <h6> <p className = 'token-declaration-text'>       You have {window.web3.utils.fromWei(this.props.LPTokenBalance, 'Ether')} STK tokens staked</p></h6>
                     <form onSubmit={(event) => {
                       event.preventDefault()
                       let AmountStaked
@@ -33,7 +33,7 @@ class Stake extends Component {
                       }
                       else { }
                     }}>
-                      <div class="form-group form-body" style={{ marginTop: 0 }}>
+                      <div class="form-group" style={{ marginTop: 0 }}>
                         <label for="exampleInputNumber"> STAKE Token </label>
                         <span class='float-right text-muted'>
                           You have {window.web3.utils.fromWei(this.props.StakeTokenBalance, 'Ether')}  Stake Tokens

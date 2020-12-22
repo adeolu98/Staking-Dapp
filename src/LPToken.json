@@ -3605,8 +3605,8 @@
           }
         ],
         "contractDependencies": [
-          97,
           137,
+          97,
           312
         ],
         "contractKind": "contract",
@@ -7559,8 +7559,8 @@
           }
         ],
         "contractDependencies": [
-          97,
           137,
+          97,
           312,
           561,
           615
@@ -8987,8 +8987,8 @@
           }
         ],
         "contractDependencies": [
-          97,
           137,
+          97,
           312,
           561,
           615,
@@ -12564,8 +12564,8 @@
           }
         ],
         "contractDependencies": [
-          97,
           137,
+          97,
           312
         ],
         "contractKind": "contract",
@@ -16518,8 +16518,8 @@
           }
         ],
         "contractDependencies": [
-          97,
           137,
+          97,
           312,
           561,
           615
@@ -17946,8 +17946,8 @@
           }
         ],
         "contractDependencies": [
-          97,
           137,
+          97,
           312,
           561,
           615,
@@ -18351,7 +18351,7 @@
     "version": "0.4.26+commit.4563c3fc.Emscripten.clang"
   },
   "networks": {
-    "5777": {
+    "3": {
       "events": {
         "0x0f6798a560793a54c3bcfe86a93cde1e73087d944c0ea20544137d4121396885": {
           "anonymous": false,
@@ -18439,12 +18439,12 @@
         }
       },
       "links": {},
-      "address": "0xDF17E2a61464F9571AB9082810821E412810bd0D",
-      "transactionHash": "0x492ed14ce6d6330e388da2ca4a09180201343a04acd09e9e4eea3ea473420792"
+      "address": "0xb89571643D92ec85DCB20b397DD28E1166107c42",
+      "transactionHash": "0x35b0c2c3226c9fec8a02be22253fabfb0c127960f159710ee97fe3b6bac11da3"
     }
   },
   "schemaVersion": "3.3.1",
-  "updatedAt": "2020-12-18T18:17:55.466Z",
+  "updatedAt": "2020-12-21T18:48:21.888Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {
