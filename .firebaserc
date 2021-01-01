@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "staking-dapp",
+    "staking-dapp": "staking-dapp-c9101"
+  }
+}

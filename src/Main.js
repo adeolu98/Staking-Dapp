@@ -45,21 +45,18 @@ class Main extends Component {
         }
  
         return (
-
             <div className=' card border border-dark rounded-lg shadow-lg p-3 mb-5 bg-white rounded card-props'>
                 <div className='card-body'>
                         <button class=" stake-stake-btn btn-lg" onClick={(event) => { this.setState({ staking: 'true', StakeBgColor: 'lightgrey', WithdrawBgColor: 'white' }) }} style={{ backgroundColor: this.state.StakeBgColor }} >
-                            <h6> STAKE </h6>
+                         <h6 style = {{fontSize: '1.8vw'}}> STAKE </h6>
                         </button>
                         <button type="submit" class=" stake-withdraw-btn btn-lg" onClick={(event) => { this.setState({ staking: 'false', StakeBgColor: 'white', WithdrawBgColor: 'lightgrey' }) }} style={{ backgroundColor: this.state.WithdrawBgColor }}>
-                            <h6>WITHDRAW</h6>
+                            <h6 style = {{fontSize: '1.8vw'}} >WITHDRAW</h6>
                         </button>
-                
                     {content}
                 </div>
             </div>
         );
-
     }
 }
 
