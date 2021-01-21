@@ -24,25 +24,24 @@ contract stakingContract {
     event Stake (address);
 
     constructor(IERC20 _StakeToken, IERC20 _RewardToken, IERC20 _LPToken) public{
-
         staketokenAdd =_StakeToken;
         rewardtokenAdd = _RewardToken;
         lptokenAdd = _LPToken;
 
     }
 
-    function getStakeTokenBalofContract() public view returns(uint StakeTokenBal){
-        StakeTokenBal= staketokenAdd.balanceOf(stakingContractAdd);
+    function getStakeTokenBalofContract() public  returns(uint){
+        return StakeTokenBal= staketokenAdd.balanceOf(stakingContractAdd);
         
     }
     
-    function getLPTokenBalofContract() public view returns(uint totalLPbal){
-        totalLPbal = lptokenAdd.balanceOf(stakingContractAdd);
+    function getLPTokenBalofContract() public  returns(uint){
+        return totalLPbal = lptokenAdd.balanceOf(stakingContractAdd);
     }
     
     
-    function getRewardTokenBalofContract() public view returns(uint RewardTokenBal){
-       RewardTokenBal = rewardtokenAdd.balanceOf(stakingContractAdd);
+    function getRewardTokenBalofContract() public  returns(uint){
+      return  RewardTokenBal = rewardtokenAdd.balanceOf(stakingContractAdd);
     }
     
     
@@ -53,8 +52,8 @@ contract stakingContract {
     
     
     
-    function timeOfstaking() public view returns (uint timeOfStaking) {
-        timeOfStaking = now;
+    function timeOfstaking() public  returns (uint) {
+        return timeOfStaking = now;
     }
      
     function stake(uint _amountStaked) public {
