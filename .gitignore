@@ -25,3 +25,10 @@ yarn-error.log*
 
 # Local Netlify folder
 .netlify
+
+
+/node_modules
+/build
+/firebase
+artifacts/
+/migrations

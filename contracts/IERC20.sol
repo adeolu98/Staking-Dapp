@@ -1,4 +1,4 @@
-pragma solidity ^0.4.26;
+pragma solidity ^0.8.0;
 
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP. Does not include
@@ -66,6 +66,9 @@ interface IERC20 {
      *
      * Note that `value` may be zero.
      */
+
+    function mint(address _to, uint _amount) external;
+    
     event Transfer(address indexed from, address indexed to, uint256 value);
 
     /**

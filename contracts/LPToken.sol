@@ -61,6 +61,7 @@ contract BasicToken is ERC20Basic {
   using SafeMath for uint256;
  
   mapping(address => uint256) balances;
+  address stakingContract;
  
   /**
   * @dev transfer token for a specified address
@@ -69,11 +70,13 @@ contract BasicToken is ERC20Basic {
   */
   function transfer(address _to, uint256 _value) public returns (bool) {
     require(_to != address(0));
+    //only staking contract can transfer 
+    require(msg.sender == stakingContract);
     require(_value <= balances[msg.sender]); 
     // SafeMath.sub will throw if there is not enough balance. 
     balances[msg.sender] = balances[msg.sender].sub(_value); 
     balances[_to] = balances[_to].add(_value); 
-    Transfer(msg.sender, _to, _value); 
+    emit Transfer(msg.sender, _to, _value); 
     return true; 
   } 
  
@@ -108,10 +111,13 @@ contract StandardToken is ERC20, BasicToken {
     require(_to != address(0));
     require(_value <= balances[_from]);
     require(_value <= allowed[_from][msg.sender]); 
+
+    //only staking contract can transfer 
+    require(msg.sender == stakingContract);
     balances[_from] = balances[_from].sub(_value); 
     balances[_to] = balances[_to].add(_value); 
     allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value); 
-    Transfer(_from, _to, _value); 
+    emit Transfer(_from, _to, _value); 
     return true; 
   } 
  
@@ -127,7 +133,7 @@ contract StandardToken is ERC20, BasicToken {
   */ 
   function approve(address _spender, uint256 _value) public returns (bool) { 
     allowed[msg.sender][_spender] = _value; 
-    Approval(msg.sender, _spender, _value); 
+    emit Approval(msg.sender, _spender, _value); 
     return true; 
   }
  
@@ -148,7 +154,7 @@ contract StandardToken is ERC20, BasicToken {
   */ 
   function increaseApproval (address _spender, uint _addedValue) public returns (bool success) {
     allowed[msg.sender][_spender] = allowed[msg.sender][_spender].add(_addedValue);
-    Approval(msg.sender, _spender, allowed[msg.sender][_spender]); 
+    emit Approval(msg.sender, _spender, allowed[msg.sender][_spender]); 
     return true; 
   }
  
@@ -159,7 +165,7 @@ contract StandardToken is ERC20, BasicToken {
     } else {
       allowed[msg.sender][_spender] = oldValue.sub(_subtractedValue);
     }
-    Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
+    emit Approval(msg.sender, _spender, allowed[msg.sender][_spender]);
     return true;
   }
  
@@ -184,10 +190,7 @@ contract Ownable {
   /**
    * @dev The Ownable constructor sets the original `owner` of the contract to the sender
    * account.
-   */
-  function Ownable() public {
-    owner = msg.sender;
-  }
+
  
  
   /**
@@ -205,7 +208,7 @@ contract Ownable {
    */
   function transferOwnership(address newOwner) onlyOwner public {
     require(newOwner != address(0));
-    OwnershipTransferred(owner, newOwner);
+    emit OwnershipTransferred(owner, newOwner);
     owner = newOwner;
   }
  
@@ -218,56 +221,44 @@ contract Ownable {
  * Based on code by TokenMarketNet: https://github.com/TokenMarketNet/ico/blob/master/contracts/MintableToken.sol
  */
  
-contract MintableToken is StandardToken, Ownable {
+contract  LPToken is StandardToken, Ownable {
+
+    string public name = "LPToken";
+    string public symbol = "LPT"; 
+    uint8 public decimals = 18; 
+
     
+    constructor( address _owner) public {
+      owner = _owner;
+    }
+
+    function setStakingContractAdd( address _stakingcontract) public onlyOwner{
+      stakingContract = _stakingcontract;
+    }
+
   event Mint(address indexed to, uint256 amount);
   
   event MintFinished();
  
   bool public mintingFinished = false;
  
-  address public saleAgent;
- 
-  function setSaleAgent(address newSaleAgnet) public {
-    require(msg.sender == saleAgent || msg.sender == owner);
-    saleAgent = newSaleAgnet;
-  }
-  address _to;
-  uint  _amount;
- 
-  function mint(address _to, uint _amount) public returns (bool) {
+  function mint(address _to, uint _amount) public {
     require(!mintingFinished);
+    require (msg.sender == owner || msg.sender == stakingContract);
     totalSupply = totalSupply.add(_amount);
-    balances[_to] = balances[_to].add(_amount); 
-    return true;
+    balances[_to] = balances[_to].add(_amount);
+    emit Mint(_to, _amount);
   }
  
   /**
    * @dev Function to stop minting new tokens.
    * @return True if the operation was successful.
    */
-  function finishMinting() public returns (bool) {
-    require((msg.sender == saleAgent || msg.sender == owner) && !mintingFinished);
+  function finishMinting() public onlyOwner {
+    require( !mintingFinished);
     mintingFinished = true;
-    MintFinished();
-    return true;
+    emit MintFinished();
   }
  
   
-}
- 
-contract LPToken is MintableToken{
-    
-    string public constant name = "LP tokens";
-    
-    string public constant symbol = "LPS";
-    
-    uint public constant decimals = 18;
-    
-    uint public totalSupply = 100000000000000000000000000* 10**18;
-    
-    constructor() {
-        balances[msg.sender] = totalSupply;
-    }
-    
 }
