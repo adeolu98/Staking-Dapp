@@ -18,7 +18,7 @@ class Withdraw extends Component {
 
 
             <div class="">
-                <h6> <p className = 'token-declaration-text'>       You have {window.web3.utils.fromWei(this.props.LPTokenBalance, 'Ether')} STK tokens staked</p></h6>
+                <h6> <p className='token-declaration-text'>       You have {window.web3.utils.fromWei(this.props.LPTokenBalance, 'Ether')} STK tokens staked</p></h6>
                 <form onSubmit={(event) => {
                     event.preventDefault()
                     let AmountToBeWithdrawn
