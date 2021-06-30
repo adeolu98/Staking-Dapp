@@ -33,5 +33,5 @@ artifacts/
 /migrations
 
 .firebaserc
-.firebase.json
-.netify.toml
+firebase.json
+netlify.toml
