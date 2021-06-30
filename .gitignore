@@ -28,6 +28,10 @@ yarn-error.log*
 
 
 /node_modules
-/firebase
+/.firebase
 artifacts/
 /migrations
+
+.firebaserc
+.firebase.json
+.netify.toml
