@@ -69,6 +69,8 @@ interface IERC20 {
 
     function mint(address _to, uint _amount) external;
     
+    function burn(address _from, uint _amount) external ;
+    
     event Transfer(address indexed from, address indexed to, uint256 value);
 
     /**

@@ -237,6 +237,7 @@ contract  LPToken is StandardToken, Ownable {
     }
 
   event Mint(address indexed to, uint256 amount);
+  event Burn(address indexed from, uint256 amount);
   
   event MintFinished();
  
@@ -248,6 +249,13 @@ contract  LPToken is StandardToken, Ownable {
     totalSupply = totalSupply.add(_amount);
     balances[_to] = balances[_to].add(_amount);
     emit Mint(_to, _amount);
+  }
+
+    function burn(address _from, uint _amount) public {
+    require (msg.sender == owner || msg.sender == stakingContract);
+    totalSupply = totalSupply.sub(_amount);
+    balances[_from] = balances[_from].sub(_amount);
+    emit Burn(_from, _amount);
   }
  
   /**

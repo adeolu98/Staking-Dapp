@@ -7,13 +7,13 @@ contract stakingContract {
     IERC20 public staketokenAdd;
     IERC20 public lptokenAdd;
     IERC20 public rewardtokenAdd;
-    uint lptokenBalOfSender;
+    
 
     mapping (address => uint) public timeOfStaking;
     event Withdraw (address);
     event Stake (address);
 
-    constructor(IERC20 _StakeToken, IERC20 _RewardToken, IERC20 _LPToken) public{
+    constructor(IERC20 _StakeToken, IERC20 _RewardToken, IERC20 _LPToken) {
         staketokenAdd =_StakeToken;
         rewardtokenAdd = _RewardToken;
         lptokenAdd = _LPToken;
@@ -31,7 +31,7 @@ contract stakingContract {
       return  rewardtokenAdd.balanceOf(address(this));
     }
     
-    //gert amount staked by staker
+    //gert amount curently staked by staker
     function getStakedAmount( address staker) public view returns(uint){
         return lptokenAdd.balanceOf(staker);
     }
@@ -62,8 +62,8 @@ contract stakingContract {
         require(lptokenAdd.balanceOf(msg.sender) > 0, 'you have no staked tokens');
         uint lpamount = lptokenAdd.balanceOf(msg.sender);
 
-        //transfer lptoken to the contract
-        lptokenAdd.transferFrom(msg.sender, address(this), lpamount);
+        //burn lp token with msg.sender 
+        lptokenAdd.burn(msg.sender, lpamount);
 
         // transfer staked tokens back to owner 
         staketokenAdd.transfer(msg.sender, lpamount);
